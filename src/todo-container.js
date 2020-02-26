@@ -1,5 +1,9 @@
-const TodoContainer = () => {
+const TodoContainer = (name) => {
     const todos = [];
+
+    const getName = () => {
+        return name;
+    }
 
     const getTodos = () => {
         return todos;
@@ -11,12 +15,13 @@ const TodoContainer = () => {
 
     return {
         getTodos,
-        addTodo
+        addTodo,
+        getName
     }
 };
 
-const TodoContainerTimePeriod = (timePeriod) => {
-    const prototype = TodoContainer();
+const TodoContainerTimePeriod = (name, timePeriod) => {
+    const prototype = TodoContainer(name);
 
     const findTodosFromPeriod = () => {
         console.log(timePeriod);
