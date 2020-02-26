@@ -1,9 +1,8 @@
 import Todo from './todo';
 import {TodoContainer, TodoContainerTimePeriod} from './todo-container';
 import organizer from './organizer';
+import userInterface from './user-interface';
 
-window.todo = Todo('feed the cat');
-window.todoContainer = TodoContainer();
-window.todoContainerTimePeriod = TodoContainerTimePeriod('today');
-window.todoContainer.addTodo(Todo('make lunch'));
-window.organizer = organizer;
+window.org = organizer;
+window.org.createProjectContainer("trip");
+userInterface.renderProjectMenu(window.org.getProjectContainers());

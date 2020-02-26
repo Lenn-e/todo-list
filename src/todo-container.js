@@ -3,21 +3,21 @@ const TodoContainer = (name) => {
 
     const getName = () => {
         return name;
-    }
+    };
 
     const getTodos = () => {
         return todos;
-    }
+    };
 
     const addTodo = (todo) => {
         todos.push(todo);
-    }
+    };
 
     return {
         getTodos,
         addTodo,
         getName
-    }
+    };
 };
 
 const TodoContainerTimePeriod = (name, timePeriod) => {

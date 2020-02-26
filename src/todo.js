@@ -3,15 +3,15 @@ const Todo = (content) => {
 
     const getContent = function() {
         return content;
-    }
+    };
 
     const isChecked = function() {
         return checked;
-    }
+    };
     
     const toggleChecked = function() {
         checked = !checked;
-    }
+    };
 
     return {
         getContent,
