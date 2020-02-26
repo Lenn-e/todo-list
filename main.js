@@ -94,7 +94,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\nconst todo = Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"suck a dick\");\nconsole.log(todo);\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n/* harmony import */ var _todo_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo-container */ \"./src/todo-container.js\");\n\n\n\nwindow.todo = Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('feed the cat');\nwindow.todoContainer = Object(_todo_container__WEBPACK_IMPORTED_MODULE_1__[\"TodoContainer\"])();\nwindow.todoContainerTimePeriod = Object(_todo_container__WEBPACK_IMPORTED_MODULE_1__[\"TodoContainerTimePeriod\"])('today');\nwindow.todoContainer.addTodo(Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('make lunch'));\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/todo-container.js":
+/*!*******************************!*\
+  !*** ./src/todo-container.js ***!
+  \*******************************/
+/*! exports provided: TodoContainer, TodoContainerTimePeriod */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TodoContainer\", function() { return TodoContainer; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TodoContainerTimePeriod\", function() { return TodoContainerTimePeriod; });\nconst TodoContainer = () => {\n    const todos = [];\n\n    const getTodos = () => {\n        return todos;\n    }\n\n    const addTodo = (todo) => {\n        todos.push(todo);\n    }\n\n    return {\n        getTodos,\n        addTodo\n    }\n};\n\nconst TodoContainerTimePeriod = (timePeriod) => {\n    const prototype = TodoContainer();\n\n    const findTodosFromPeriod = () => {\n        console.log(timePeriod);\n    };\n\n    return Object.assign({}, prototype, {findTodosFromPeriod});\n}\n\n\n\n\n//# sourceURL=webpack:///./src/todo-container.js?");
 
 /***/ }),
 
@@ -106,7 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst Todo = (text) => {\n    const content = text;\n\n\n\n    return {\n        content,\n\n    };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Todo);\n\n//# sourceURL=webpack:///./src/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst Todo = (content) => {\n    let checked = false;\n\n    const getContent = function() {\n        return content;\n    }\n\n    const isChecked = function() {\n        return checked;\n    }\n    \n    const toggleChecked = function() {\n        checked = !checked;\n    }\n\n    return {\n        getContent,\n        isChecked,\n        toggleChecked,\n    };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Todo);\n\n//# sourceURL=webpack:///./src/todo.js?");
 
 /***/ })
 
