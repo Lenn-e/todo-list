@@ -30,7 +30,7 @@ const TodoContainer = (name) => {
 
 const TodoContainerTimePeriod = (name, timePeriod) => {
     const prototype = TodoContainer(name);
-
+    
     const findTodosFromPeriod = () => {
         console.log(timePeriod);
     };

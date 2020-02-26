@@ -22,7 +22,13 @@ projectListDisplay.addEventListener('click', controller.displayContainer);
 
 window.org = organizer;
 window.org.createProjectContainer("trip");
+window.org.getProjectContainer("project-0").addTodo(Todo("some task"));
+window.org.getProjectContainer("project-0").addTodo(Todo("proj 0"));
+window.org.getProjectContainer("project-0").addTodo(Todo("do it"));
 window.org.getProjectContainer("project-1").addTodo(Todo("idk do something"));
-window.org.getProjectContainer("project-1").addTodo(Todo("idk fasdfing"));
+window.org.getProjectContainer("project-1").addTodo(Todo("proj 1"));
 window.org.getProjectContainer("project-1").addTodo(Todo("idk do shahahahaing"));
+window.org.getProjectContainer("project-2").addTodo(Todo("cook"));
+window.org.getProjectContainer("project-2").addTodo(Todo("proj 2"));
+window.org.getProjectContainer("project-2").addTodo(Todo("workout"));
 userInterface.renderProjectMenu(window.org.getProjectContainers());

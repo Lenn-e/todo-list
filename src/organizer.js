@@ -9,7 +9,7 @@ const organizer = (() => {
 
     const getNextWeekContainer = () => nextWeekContainer;
 
-    const getProjectContainer = (projectID) => projectContainers.find(project => project.projectID = projectID);
+    const getProjectContainer = (projectID) => projectContainers.find(project => project.getProjectID() === projectID);
 
     const createProjectContainer = (projectName) => {
         projectContainers.push(TodoContainer(projectName));
