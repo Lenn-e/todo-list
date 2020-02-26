@@ -94,7 +94,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n/* harmony import */ var _todo_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo-container */ \"./src/todo-container.js\");\n\n\n\nwindow.todo = Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('feed the cat');\nwindow.todoContainer = Object(_todo_container__WEBPACK_IMPORTED_MODULE_1__[\"TodoContainer\"])();\nwindow.todoContainerTimePeriod = Object(_todo_container__WEBPACK_IMPORTED_MODULE_1__[\"TodoContainerTimePeriod\"])('today');\nwindow.todoContainer.addTodo(Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('make lunch'));\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n/* harmony import */ var _todo_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo-container */ \"./src/todo-container.js\");\n/* harmony import */ var _organizer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./organizer */ \"./src/organizer.js\");\n\n\n\n\nwindow.todo = Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('feed the cat');\nwindow.todoContainer = Object(_todo_container__WEBPACK_IMPORTED_MODULE_1__[\"TodoContainer\"])();\nwindow.todoContainerTimePeriod = Object(_todo_container__WEBPACK_IMPORTED_MODULE_1__[\"TodoContainerTimePeriod\"])('today');\nwindow.todoContainer.addTodo(Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('make lunch'));\nwindow.organizer = _organizer__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/organizer.js":
+/*!**************************!*\
+  !*** ./src/organizer.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-container */ \"./src/todo-container.js\");\n\n\nconst organizer = (() => {\n    const todayContainer = Object(_todo_container__WEBPACK_IMPORTED_MODULE_0__[\"TodoContainerTimePeriod\"])(\"Today\", 1);\n    const nextWeekContainer = Object(_todo_container__WEBPACK_IMPORTED_MODULE_0__[\"TodoContainerTimePeriod\"])(\"Next 7 days\", 7);\n    const projectContainers = {};\n    const currentContainer = todayContainer;\n\n    const getTodayContainer = () => todayContainer;\n\n    const getNextWeekContainer = () => nextWeekContainer;\n\n    const getProjectContainer = (projectName) => projectContainers[projectName];\n\n    const createProjectContainer = (projectName) => {\n        projectContainers.projectName = Object(_todo_container__WEBPACK_IMPORTED_MODULE_0__[\"TodoContainer\"])(projectName);\n    }\n\n    const changeCurrentContainer = (container) => {\n        currentContainer = container;\n    }\n\n    const getCurrentContainer = () => currentContainer;\n\n    return {\n        getTodayContainer,\n        getNextWeekContainer,\n        getProjectContainer,\n        createProjectContainer,\n        changeCurrentContainer,\n        getCurrentContainer\n    }\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (organizer);\n\n//# sourceURL=webpack:///./src/organizer.js?");
 
 /***/ }),
 
@@ -106,7 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TodoContainer\", function() { return TodoContainer; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TodoContainerTimePeriod\", function() { return TodoContainerTimePeriod; });\nconst TodoContainer = () => {\n    const todos = [];\n\n    const getTodos = () => {\n        return todos;\n    }\n\n    const addTodo = (todo) => {\n        todos.push(todo);\n    }\n\n    return {\n        getTodos,\n        addTodo\n    }\n};\n\nconst TodoContainerTimePeriod = (timePeriod) => {\n    const prototype = TodoContainer();\n\n    const findTodosFromPeriod = () => {\n        console.log(timePeriod);\n    };\n\n    return Object.assign({}, prototype, {findTodosFromPeriod});\n}\n\n\n\n\n//# sourceURL=webpack:///./src/todo-container.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TodoContainer\", function() { return TodoContainer; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TodoContainerTimePeriod\", function() { return TodoContainerTimePeriod; });\nconst TodoContainer = (name) => {\n    const todos = [];\n\n    const getName = () => {\n        return name;\n    }\n\n    const getTodos = () => {\n        return todos;\n    }\n\n    const addTodo = (todo) => {\n        todos.push(todo);\n    }\n\n    return {\n        getTodos,\n        addTodo,\n        getName\n    }\n};\n\nconst TodoContainerTimePeriod = (name, timePeriod) => {\n    const prototype = TodoContainer(name);\n\n    const findTodosFromPeriod = () => {\n        console.log(timePeriod);\n    };\n\n    return Object.assign({}, prototype, {findTodosFromPeriod});\n}\n\n\n\n\n//# sourceURL=webpack:///./src/todo-container.js?");
 
 /***/ }),
 
