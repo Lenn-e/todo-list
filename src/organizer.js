@@ -12,7 +12,10 @@ const organizer = (() => {
     const getProjectContainer = (projectID) => projectContainers.find(project => project.getProjectID() === projectID);
 
     const createProjectContainer = (projectName) => {
-        projectContainers.push(TodoContainer(projectName));
+        const project = TodoContainer(projectName);
+        projectContainers.push(project);
+
+        return project;
     };
 
     const getProjectContainers = () => projectContainers;

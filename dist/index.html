@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>To-do list</title>
-    <link href="css/reset.css">
-    <link href="css/style.css">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
     <div class="outter-container">
@@ -13,17 +13,24 @@
         </header>
 
         <section class="organizer-container">
-            <main class="current-project">
-                <ul class="project-todos">
-                    
-                </ul>
-            </main>
-
             <aside class="project-menu">
                 <ul class="project-list">
 
                 </ul>
+                <div>
+                    <span class="create-project-btn">+</span>
+                    <input type="text" class="project-name-input">
+                </div> 
             </aside>
+
+            <main class="current-project">
+                <div class="create-todo-field">
+
+                </div>
+                <ul class="project-todos">
+                    
+                </ul>
+            </main>
         </section>
     </div>
 
