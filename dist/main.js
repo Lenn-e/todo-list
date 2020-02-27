@@ -134,6 +134,30 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst Todo = (content) => {\n
 
 /***/ }),
 
+/***/ "./src/ui-container.js":
+/*!*****************************!*\
+  !*** ./src/ui-container.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst userInterfaceContainer = (() => {\n    const todoListDisplay = document.querySelector(\".project-todos\");\n    const createTodoField = document.querySelector(\".create-todo-field\");\n\n    const createTodoItemHtml = (todo) => {\n        return `\n        <li>\n            ${todo.getContent()}\n        </li>\n        `\n    }\n\n    const createTodoInputField = (container) => {\n        const html = `\n            <span class=\"create-todo-btn\">+</span>\n            <input type=\"text\" class=\"todo-content-input\">\n        `;\n\n        createTodoField.setAttribute(\"data-projectid\", container.getProjectID());\n        createTodoField.innerHTML = html;\n    }\n\n    const renderContainer = (container) => {\n        const html = container.getTodos().map(todo => {\n            return createTodoItemHtml(todo);\n        }).join('');\n        \n        createTodoInputField(container);\n        todoListDisplay.innerHTML = html;\n    }\n\n    const renderTodoItem = (todo) => {\n        const todoItemHtml = createTodoItemHtml(todo);\n        todoListDisplay.innerHTML += todoItemHtml;\n    } \n\n    return {\n        renderContainer,\n        renderTodoItem\n    };\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (userInterfaceContainer);\n\n//# sourceURL=webpack:///./src/ui-container.js?");
+
+/***/ }),
+
+/***/ "./src/ui-menu.js":
+/*!************************!*\
+  !*** ./src/ui-menu.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst userInterfaceMenu = (() => {\n    const projectListDisplay = document.querySelector(\".project-list\");\n\n    const createProjectListItemHtml = (container) => {\n        return `\n        <li id=\"${container.getProjectID()}\">\n            ${container.getName()}\n        </li>`;\n    };\n\n    const renderProjectList = (projectContainers) => {\n        const html = projectContainers.map(container => {\n            return createProjectListItemHtml(container);\n        }).join('');\n\n        projectListDisplay.innerHTML = html;\n    };\n\n    const renderProjectListEntry = (container) => {\n        const listItem = createProjectListItemHtml(container);\n        projectListDisplay.innerHTML += listItem;\n    }\n\n    return {\n        renderProjectList,\n        renderProjectListEntry\n    };\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (userInterfaceMenu);\n\n//# sourceURL=webpack:///./src/ui-menu.js?");
+
+/***/ }),
+
 /***/ "./src/user-interface.js":
 /*!*******************************!*\
   !*** ./src/user-interface.js ***!
@@ -142,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst Todo = (content) => {\n
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst projectListDisplay = document.querySelector(\".project-list\");\nconst todosListDisplay = document.querySelector(\".project-todos\");\nconst createTodoField = document.querySelector(\".create-todo-field\");\n\nconst userInterface = (() => {\n    const createProjectListItemHtml = (container) => {\n        return `\n        <li id=\"${container.getProjectID()}\">\n            ${container.getName()}\n        </li>`;\n    };\n\n    const renderProjectList = (projectContainers) => {\n        const html = projectContainers.map(container => {\n            return createProjectListItemHtml(container);\n        }).join('');\n\n        projectListDisplay.innerHTML = html;\n    };\n\n    const createTodoItemHtml = (todo) => {\n        return `\n        <li>\n            ${todo.getContent()}\n        </li>\n        `\n    }\n\n    const createTodoInputField = (container) => {\n        const html = `\n            <span class=\"create-todo-btn\">+</span>\n            <input type=\"text\" class=\"todo-content-input\">\n        `;\n\n        createTodoField.setAttribute(\"data-projectid\", container.getProjectID());\n        createTodoField.innerHTML = html;\n    }\n\n    const renderContainer = (container) => {\n        const html = container.getTodos().map(todo => {\n            return createTodoItemHtml(todo);\n        }).join('');\n        \n        createTodoInputField(container);\n        todosListDisplay.innerHTML = html;\n    }\n\n    const renderProjectListEntry = (container) => {\n        const listItem = createProjectListItemHtml(container);\n        projectListDisplay.innerHTML += listItem;\n    }\n\n    const renderTodoItem = (todo) => {\n        const todoItemHtml = createTodoItemHtml(todo);\n        todosListDisplay.innerHTML += todoItemHtml;\n    } \n\n    return {\n        renderProjectList,\n        renderContainer,\n        renderProjectListEntry,\n        renderTodoItem\n    };\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (userInterface);\n\n//# sourceURL=webpack:///./src/user-interface.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ui_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui-menu */ \"./src/ui-menu.js\");\n/* harmony import */ var _ui_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui-container */ \"./src/ui-container.js\");\n\n\n\nconst userInterface = (() => {\n    return Object.assign(\n        {},\n        _ui_menu__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n        _ui_container__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n    );\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (userInterface);\n\n//# sourceURL=webpack:///./src/user-interface.js?");
 
 /***/ })
 
