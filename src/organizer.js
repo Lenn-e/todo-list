@@ -21,13 +21,27 @@ const organizer = (() => {
 
     const getProjectContainers = () => projectContainers;
 
+    const getTodoByID = (ID) => {
+        let todo;
+        projectContainers.some(project => {
+            const tempTodo = project.getTodos().find(todo => todo.getTodoID() === ID);
+            if(tempTodo) {
+                todo = tempTodo;
+                return true;
+            }
+        });
+
+        return todo;
+    };
+
     return {
         initializeOrganizer,
         getTodayContainer,
         getNextWeekContainer,
         getProjectContainer,
         storeProjectContainer,
-        getProjectContainers
+        getProjectContainers,
+        getTodoByID
     }
 })();
 

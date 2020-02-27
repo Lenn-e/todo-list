@@ -32,10 +32,20 @@ const displayController = (() => {
         }
     }
 
+    function displayTodoDetails(event) {
+        const todoItem = event.target;
+        if(todoItem.classList.contains("todo-item")) {
+            const todoID = todoItem.getAttribute("data-todoid");
+            const todo = organizer.getTodoByID(todoID);
+            userInterface.renderTodoItemDetails(todo);
+        }
+    }
+
     return{
         displayContainer,
         createNewProject,
         createNewTodo,
+        displayTodoDetails,
     };
 })();
 

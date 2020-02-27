@@ -1,10 +1,10 @@
 const userInterfaceContainer = (() => {
-    const todoListDisplay = document.querySelector(".project-todos");
+    const todoListDisplay = document.querySelector(".project-todo-list");
     const createTodoField = document.querySelector(".create-todo-field");
 
     const createTodoItemHtml = (todo) => {
         return `
-        <li>
+        <li class="todo-item" data-todoid="${todo.getTodoID()}">
             ${todo.getContent()}
         </li>
         `

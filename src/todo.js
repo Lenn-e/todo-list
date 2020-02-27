@@ -1,5 +1,12 @@
+let todoIndex = 0;
+
 const Todo = (content) => {
+    const todoID = `todo-${todoIndex++}`;
     let checked = false;
+
+    const getTodoID = () => {
+        return todoID;
+    }
 
     const getContent = function() {
         return content;
@@ -14,6 +21,7 @@ const Todo = (content) => {
     };
 
     return {
+        getTodoID,
         getContent,
         isChecked,
         toggleChecked,
