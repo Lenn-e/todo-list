@@ -1,30 +1,32 @@
-import {TodoContainer, TodoContainerTimePeriod} from './todo-container';
-
 const organizer = (() => {
-    const todayContainer = TodoContainerTimePeriod("Today", 1);
-    const nextWeekContainer = TodoContainerTimePeriod("Next 7 days", 7);
-    const projectContainers = [todayContainer, nextWeekContainer];
+    let todayContainer;
+    let nextWeekContainer;
+    let projectContainers;
 
+    const initializeOrganizer = (today, nextWeek) => {
+        todayContainer = today;
+        nextWeekContainer = nextWeek;
+        projectContainers = [todayContainer, nextWeekContainer];
+    }
+    
     const getTodayContainer = () => todayContainer;
 
     const getNextWeekContainer = () => nextWeekContainer;
 
     const getProjectContainer = (projectID) => projectContainers.find(project => project.getProjectID() === projectID);
 
-    const createProjectContainer = (projectName) => {
-        const project = TodoContainer(projectName);
+    const storeProjectContainer = (project) => {
         projectContainers.push(project);
-
-        return project;
     };
 
     const getProjectContainers = () => projectContainers;
 
     return {
+        initializeOrganizer,
         getTodayContainer,
         getNextWeekContainer,
         getProjectContainer,
-        createProjectContainer,
+        storeProjectContainer,
         getProjectContainers
     }
 })();
