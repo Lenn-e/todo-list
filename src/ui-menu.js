@@ -3,7 +3,7 @@ const userInterfaceMenu = (() => {
 
     const createProjectListItemHtml = (container) => {
         return `
-        <li id="${container.getProjectID()}">
+        <li class="project-list-item clickable" id="${container.getProjectID()}">
             ${container.getName()}
         </li>`;
     };

@@ -4,7 +4,7 @@ const userInterfaceContainer = (() => {
 
     const createTodoItemHtml = (todo) => {
         return `
-        <li class="todo-item" data-todoid="${todo.getTodoID()}">
+        <li class="todo-item clickable" data-todoid="${todo.getTodoID()}">
             ${todo.getContent()}
         </li>
         `
@@ -12,7 +12,7 @@ const userInterfaceContainer = (() => {
 
     const createTodoInputField = (container) => {
         const html = `
-            <span class="create-todo-btn">+</span>
+            <span class="create-todo-btn clickable">+</span>
             <input type="text" class="todo-content-input">
         `;
 

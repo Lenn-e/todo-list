@@ -1,4 +1,38 @@
+.clickable {
+    user-select: none;
+    cursor: pointer;
+}
+
 .organizer-container {
     display: flex;
     justify-content: space-evenly;
+}
+
+.organizer-component {
+    width: 300px;
+}
+
+.project-menu {
+    border: 1px solid black;
+}
+
+.project-list-item {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid black;
+}
+
+.current-project {
+    border: 1px solid black;
+    flex-grow: 1;
+}
+
+.todo-item {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid black;
+}
+
+.todo-details {
+    border: 1px solid black;
 }
