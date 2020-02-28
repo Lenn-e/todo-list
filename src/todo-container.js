@@ -28,15 +28,4 @@ const TodoContainer = (name) => {
     };
 };
 
-const TodoContainerTimePeriod = (name, timePeriod) => {
-    const prototype = TodoContainer(name);
-    
-    const findTodosFromPeriod = () => {
-        console.log(timePeriod);
-    };
-
-    return Object.assign({}, prototype, {findTodosFromPeriod});
-}
-
-
-export {TodoContainer, TodoContainerTimePeriod};
+export {TodoContainer};

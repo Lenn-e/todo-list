@@ -1,17 +1,11 @@
 const organizer = (() => {
-    let todayContainer;
-    let nextWeekContainer;
+    let defaultContainer;
     let projectContainers;
 
-    const initializeOrganizer = (today, nextWeek) => {
-        todayContainer = today;
-        nextWeekContainer = nextWeek;
-        projectContainers = [todayContainer, nextWeekContainer];
+    const initializeOrganizer = (defaultCont) => {
+        defaultContainer = defaultCont;
+        projectContainers = [defaultContainer];
     }
-    
-    const getTodayContainer = () => todayContainer;
-
-    const getNextWeekContainer = () => nextWeekContainer;
 
     const getProjectContainer = (projectID) => projectContainers.find(project => project.getProjectID() === projectID);
 
@@ -36,8 +30,6 @@ const organizer = (() => {
 
     return {
         initializeOrganizer,
-        getTodayContainer,
-        getNextWeekContainer,
         getProjectContainer,
         storeProjectContainer,
         getProjectContainers,
