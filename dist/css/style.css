@@ -36,3 +36,12 @@
 .todo-details {
     border: 1px solid black;
 }
+
+.create-todo-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-input {
+    margin-top: 10px;
+}

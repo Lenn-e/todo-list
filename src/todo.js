@@ -1,28 +1,31 @@
 let todoIndex = 0;
 
-const Todo = (content) => {
+const Todo = (text, dueDate, priority, note) => {
     const todoID = `todo-${todoIndex++}`;
     let checked = false;
 
-    const getTodoID = () => {
-        return todoID;
-    }
+    const getTodoID = () => todoID;
 
-    const getContent = function() {
-        return content;
-    };
+    const getText = () => text || '';
 
-    const isChecked = function() {
-        return checked;
-    };
+    const getDueDate = () => dueDate || '';
+
+    const getPriority = () => priority || '';
+
+    const getNote = () => note || '';
+
+    const isChecked = () => checked;
     
-    const toggleChecked = function() {
+    const toggleChecked = () => {
         checked = !checked;
     };
 
     return {
         getTodoID,
-        getContent,
+        getText,
+        getDueDate,
+        getPriority,
+        getNote,
         isChecked,
         toggleChecked,
     };

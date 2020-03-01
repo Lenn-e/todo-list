@@ -1,7 +1,30 @@
 import userInterface from './user-interface';
 import organizer from './organizer';
-import { TodoContainer } from './todo-container';
+import TodoContainer from './todo-container';
 import Todo from './todo';
+
+const helperFunctions = (() => {
+    const extractNewTodoInputs = (createTodoContainer) => {
+        const todo = {};
+        
+        todo.todoName = createTodoContainer.querySelector("#todo-name").value;
+        todo.todoDueDate = createTodoContainer.querySelector("#todo-due-date").value;
+        todo.todoPriority = createTodoContainer.querySelector("#todo-priority").value;
+        todo.todoNote = createTodoContainer.querySelector("#todo-note").value;
+
+        return todo;
+    }
+
+    const saveTodo = (todo, currentProjectID) => {
+        const currentProject = organizer.getProjectContainer(currentProjectID);
+        currentProject.addTodo(todo);
+    }
+
+    return {
+        extractNewTodoInputs,
+        saveTodo
+    };
+})();
 
 const displayController = (() => {
     const projectNameInput = document.querySelector(".project-name-input");
@@ -21,13 +44,12 @@ const displayController = (() => {
 
     function createNewTodo(event) {
         if(event.target.classList.contains("create-todo-btn")) {
-            const projectID = this.getAttribute("data-projectid");
-            const todoContent = this.querySelector("input").value;
-            
-            const currentProject = organizer.getProjectContainer(projectID);
-            const todo = Todo(todoContent);
-            currentProject.addTodo(todo);
-
+            // get inputs from DOM and create new todo
+            let todo = helperFunctions.extractNewTodoInputs(this);
+            todo = Todo(...Object.values(todo));
+            // store it into the currently open project
+            helperFunctions.saveTodo(todo, this.getAttribute("data-projectid"));
+            // add it to the list display
             userInterface.renderTodoItem(todo);
         }
     }

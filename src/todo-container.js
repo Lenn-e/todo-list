@@ -28,4 +28,4 @@ const TodoContainer = (name) => {
     };
 };
 
-export {TodoContainer};
+export default TodoContainer;
