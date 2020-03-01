@@ -15,17 +15,22 @@ const organizer = (() => {
 
     const getProjectContainers = () => projectContainers;
 
-    const getTodoByID = (ID) => {
-        let todo;
-        projectContainers.some(project => {
-            const tempTodo = project.getTodos().find(todo => todo.getTodoID() === ID);
-            if(tempTodo) {
-                todo = tempTodo;
-                return true;
-            }
+    const findProjectContainingTodoID = (ID) => {
+        // look at all todos from all containers and return the container that includes the given todo ID
+        const temp = projectContainers.find(project => {
+            return project.getTodos().some(todo => {
+                return todo.getTodoID() === ID;
+            });
         });
+        return temp;
+    };
 
-        return todo;
+    const getTodoByID = (ID) => {
+        return findProjectContainingTodoID(ID).getTodos().find(todo => todo.getTodoID() === ID);
+    };
+
+    const deleteTodoByID = (ID) => {
+        findProjectContainingTodoID(ID).removeTodo(ID);
     };
 
     return {
@@ -33,7 +38,8 @@ const organizer = (() => {
         getProjectContainer,
         storeProjectContainer,
         getProjectContainers,
-        getTodoByID
+        getTodoByID,
+        deleteTodoByID
     }
 })();
 

@@ -20,11 +20,20 @@ const TodoContainer = (name) => {
         todos.push(todo);
     };
 
+    const removeTodo = (todoID) => {
+        const index = todos.findIndex(todo => {
+            return todo.getTodoID() === todoID;
+        })
+
+        todos.splice(index, 1);
+    }
+
     return {
         getProjectID,
         getTodos,
         addTodo,
-        getName
+        getName,
+        removeTodo
     };
 };
 

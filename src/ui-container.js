@@ -50,11 +50,17 @@ const userInterfaceContainer = (() => {
     const renderTodoItem = (todo) => {
         const todoItemHtml = createTodoItemHtml(todo);
         todoListDisplay.innerHTML += todoItemHtml;
-    } 
+    }
+
+    const removeTodoItem = (todoID) => {
+        const todo = todoListDisplay.querySelector(`.todo-item[data-todoid=${todoID}`);
+        todoListDisplay.removeChild(todo);
+    }
 
     return {
         renderContainer,
-        renderTodoItem
+        renderTodoItem,
+        removeTodoItem
     };
 })();
 

@@ -10,11 +10,13 @@ const projectListDisplay = document.querySelector(".project-list");
 const createProjectBtn = document.querySelector(".create-project-btn");
 const createTodoField = document.querySelector(".create-todo-field");
 const projectTodoList = document.querySelector(".project-todo-list");
+const todoDetails = document.querySelector(".todo-details");
 
 projectListDisplay.addEventListener('click', displayController.displayContainer);
 createProjectBtn.addEventListener('click', displayController.createNewProject);
 createTodoField.addEventListener('click', displayController.createNewTodo);
 projectTodoList.addEventListener('click', displayController.displayTodoDetails);
+todoDetails.addEventListener('click', displayController.deleteTodo);
 
 organizer.initializeOrganizer(TodoContainer("Stuff I need to do"));
 

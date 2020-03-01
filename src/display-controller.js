@@ -63,11 +63,21 @@ const displayController = (() => {
         }
     }
 
+    function deleteTodo(event) {
+        if(event.target.id === "delete-todo-button") {
+            const todoID = this.getAttribute("data-todoid");
+            organizer.deleteTodoByID(todoID);
+            userInterface.removeTodoItem(todoID);
+            userInterface.clearDetailsDisplay();
+        }
+    }
+
     return{
         displayContainer,
         createNewProject,
         createNewTodo,
         displayTodoDetails,
+        deleteTodo
     };
 })();
 
