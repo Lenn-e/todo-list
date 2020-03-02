@@ -27,16 +27,6 @@
     flex-grow: 1;
 }
 
-.todo-item {
-    height: 40px;
-    line-height: 40px;
-    border: 1px solid black;
-}
-
-.todo-details {
-    border: 1px solid black;
-}
-
 .create-todo-field {
     display: flex;
     flex-direction: column;
@@ -45,3 +35,70 @@
 .todo-input {
     margin-top: 10px;
 }
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+.checkbox {
+    position: relative;
+    height: 100%;
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.checkbox.checked::before {
+    transform: rotate(-45deg) scale(1);
+    visibility: visible;
+}
+
+.checkbox::before {
+    visibility: hidden;
+    top: 7px;
+    left: 3px;
+    position: absolute;
+    content: "";
+    width: 25px;
+    height: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 0 0 5px 5px;
+    transform: rotate(-45deg) scale(0);
+    transition: 0.2s;
+    overflow: hidden;
+}
+
+.todo-item-name {
+    
+}
+
+.todo-modal {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+   
+}
+
+.show-todo-modal {
+    display: flex;
+}
+
+.todo-details {
+    background: white;
+    margin: 100px auto;
+    padding: 20px;
+    width: 50%;
+}
+
+
