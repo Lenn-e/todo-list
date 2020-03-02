@@ -9,11 +9,16 @@
 }
 
 .organizer-component {
-    width: 300px;
 }
 
 .project-menu {
     border: 1px solid black;
+}
+
+.input-name-field {
+    display: flex;
+    align-items: center;
+    height: 50px;
 }
 
 .project-list-item {
@@ -24,16 +29,12 @@
 
 .current-project {
     border: 1px solid black;
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .create-todo-field {
     display: flex;
     flex-direction: column;
-}
-
-.todo-input {
-    margin-top: 10px;
 }
 
 .todo-item {
@@ -43,42 +44,90 @@
     border: 1px solid black;
 }
 
+.todo-item:hover {
+    background-color: #f0f0f0;
+}
+
+.priority-low {
+    background-color: ;
+}
+
 .checked {
     text-decoration: line-through;
 }
 
 .checkbox {
     position: relative;
-    height: 100%;
-    width: 40px;
-    border: 1px solid black;
-    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #96989c;
+    border-radius: 0%;
     overflow: hidden;
+    transition: 0.5s;
+}
+
+.checkbox:hover {
+    background-color: #f0f0f0;
+}
+
+.checkbox:hover::before {
+    visibility: visible;
+    width: 15px;
+    height: 6px;
+    border-color: #96989c;
 }
 
 .checkbox.checked::before {
-    transform: rotate(-45deg) scale(1);
     visibility: visible;
+    width: 15px;
+    height: 6px;
+    border-color: rgb(255, 255, 255) !important;
 }
 
 .checkbox::before {
     visibility: hidden;
     top: 7px;
-    left: 3px;
+    left: 4px;
     position: absolute;
     content: "";
-    width: 25px;
-    height: 10px;
-    border-color: black;
+    width: 15px;
+    height: 6px;
+    border-color: white;
     border-style: solid;
-    border-width: 0 0 5px 5px;
-    transform: rotate(-45deg) scale(0);
+    border-width: 0 0 3px 3px;
+    transform: rotate(-45deg);
     transition: 0.2s;
     overflow: hidden;
 }
 
+.low {
+    border-color: rgb(92, 160, 248);
+}
+.medium {
+    border-color: rgb(248, 186, 70);
+}
+.high {
+    border-color: rgb(248, 109, 109);
+}
+.checkbox.checked {
+    border-radius: 100%;
+}
+.checkbox.checked.low {
+    background-color: rgb(173, 207, 251);
+}
+.checkbox.checked.medium {
+    background-color: rgb(246, 212, 150);
+}
+.checkbox.checked.high {
+    background-color: rgb(255, 189, 189);
+}
+
 .todo-item-name {
     
+}
+
+.date-due {
+    margin-left: auto;
 }
 
 .todo-modal {
