@@ -1,11 +1,5 @@
 const organizer = (() => {
-    let defaultContainer;
-    let projectContainers;
-
-    const initializeOrganizer = (defaultCont) => {
-        defaultContainer = defaultCont;
-        projectContainers = [defaultContainer];
-    }
+    const projectContainers = [];
 
     const getProjectContainer = (projectID) => projectContainers.find(project => project.getProjectID() === projectID);
 
@@ -34,7 +28,6 @@ const organizer = (() => {
     };
 
     return {
-        initializeOrganizer,
         getProjectContainer,
         storeProjectContainer,
         getProjectContainers,

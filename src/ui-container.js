@@ -11,10 +11,13 @@ const userInterfaceContainer = (() => {
     const createTodoItemHtml = (todo) => {
         const html = `
         <li class="todo-item clickable" data-todoid="${todo.getTodoID()}">
-            <div class="checkbox ${todo.isChecked() ? "checked" : ""}">
+            <div class="checkbox ${todo.isChecked() ? "checked" : ""} ${todo.getPriority()}">
             </div>
             <div class="todo-item-name ${todo.isChecked() ? "checked" : ""}">
                 ${todo.getText()}
+            </div>
+            <div class="date-due">
+                date due<br>${todo.getDueDate()}
             </div>
         </li>
         `
@@ -24,7 +27,7 @@ const userInterfaceContainer = (() => {
     const createTodoInputField = (container) => {
         // create input for name, dateDue, priority and note
         const html = `
-            <div>
+            <div class="input-name-field">
                 <span class="create-todo-btn clickable">+</span>
                 <input id="todo-name" type="text" class="todo-input" placeholder="Todo name">
             </div>

@@ -24,11 +24,16 @@ projectTodoList.addEventListener('click', displayController.checkTodo);
 todoDetails.addEventListener('click', displayController.deleteTodo);
 todoModal.addEventListener('click', displayController.closeTodoModal);
 
-organizer.initializeOrganizer(TodoContainer("Stuff I need to do"));
+const initializeOrganizer = (() => {
+    const defaultContainer = TodoContainer("Stuff I need to do");
+    organizer.storeProjectContainer(defaultContainer)
+    
+    const todo = Todo("some task", "tomorrow", "low", "this is a note");
+    todo.toggleChecked();
+    defaultContainer.addTodo(todo);
+    defaultContainer.addTodo(Todo("proj 0", "today", "medium", "this is a note too"));
+    defaultContainer.addTodo(Todo("do it", "in a week", "low", "hello from the other side"));
 
-const todo = Todo("some task", "tomorrow", "low", "this is a note");
-todo.toggleChecked();
-organizer.getProjectContainer("project-0").addTodo(todo);
-organizer.getProjectContainer("project-0").addTodo(Todo("proj 0", "today", "medium", "this is a note too"));
-organizer.getProjectContainer("project-0").addTodo(Todo("do it", "in a week", "low", "hello from the other side"));
-userInterface.renderProjectList(organizer.getProjectContainers());
+    userInterface.renderContainer(defaultContainer);
+    userInterface.renderProjectList([defaultContainer]);
+})();
