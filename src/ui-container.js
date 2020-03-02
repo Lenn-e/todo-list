@@ -4,12 +4,21 @@ const userInterfaceContainer = (() => {
     const todoListDisplay = document.querySelector(".project-todo-list");
     const createTodoField = document.querySelector(".create-todo-field");
 
+    const getTodoNodeByID = (ID) => {
+        return todoListDisplay.querySelector(`.todo-item[data-todoid=${ID}`);
+    }
+
     const createTodoItemHtml = (todo) => {
-        return `
+        const html = `
         <li class="todo-item clickable" data-todoid="${todo.getTodoID()}">
-            ${todo.getText()}
+            <div class="checkbox ${todo.isChecked() ? "checked" : ""}">
+            </div>
+            <div class="todo-item-name ${todo.isChecked() ? "checked" : ""}">
+                ${todo.getText()}
+            </div>
         </li>
         `
+        return html;
     }
 
     const createTodoInputField = (container) => {
@@ -17,10 +26,10 @@ const userInterfaceContainer = (() => {
         const html = `
             <div>
                 <span class="create-todo-btn clickable">+</span>
-                <input id="todo-name" type="text" class="todo-input">
+                <input id="todo-name" type="text" class="todo-input" placeholder="Todo name">
             </div>
 
-            <input id="todo-due-date" class="todo-input" type="text" placeholder="Select Date.." readonly="readonly">
+            <input id="todo-due-date" class="todo-input" type="text" placeholder="Select Date" readonly="readonly">
 
             <label for="priority">Set priority</label>
             <select id="todo-priority" class="todo-input">
@@ -29,7 +38,7 @@ const userInterfaceContainer = (() => {
                 <option value="high">High</option>
             </select>
 
-            <textarea id="todo-note" placeholder="Write a note" class="todo-input"></textarea>
+            <input id="todo-note" class="todo-input" placeholder="Write a note" type="text">
         `;
         
         createTodoField.setAttribute("data-projectid", container.getProjectID());
@@ -53,14 +62,21 @@ const userInterfaceContainer = (() => {
     }
 
     const removeTodoItem = (todoID) => {
-        const todo = todoListDisplay.querySelector(`.todo-item[data-todoid=${todoID}`);
+        const todo = getTodoNodeByID(todoID);
         todoListDisplay.removeChild(todo);
+    }
+
+    const checkTodo = (todoID) => {
+        const todo = getTodoNodeByID(todoID);
+        todo.querySelector(".checkbox").classList.toggle("checked");
+        todo.querySelector(".todo-item-name").classList.toggle("checked");
     }
 
     return {
         renderContainer,
         renderTodoItem,
-        removeTodoItem
+        removeTodoItem,
+        checkTodo
     };
 })();
 

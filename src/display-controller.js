@@ -36,14 +36,16 @@ const displayController = (() => {
     }
 
     function createNewProject(event) {
-        const projectName = projectNameInput.value;
-        const project = TodoContainer(projectName);
-        organizer.storeProjectContainer(project);
-        userInterface.renderProjectListEntry(project);
+        if(event.target.classList.contains("create-project-btn") || event.code == 'Enter') {
+            const projectName = projectNameInput.value;
+            const project = TodoContainer(projectName);
+            organizer.storeProjectContainer(project);
+            userInterface.renderProjectListEntry(project);
+        }
     }
 
     function createNewTodo(event) {
-        if(event.target.classList.contains("create-todo-btn")) {
+        if(event.target.classList.contains("create-todo-btn") || event.code == 'Enter') {
             // get inputs from DOM and create new todo
             let todo = helperFunctions.extractNewTodoInputs(this);
             todo = Todo(...Object.values(todo));
@@ -56,8 +58,13 @@ const displayController = (() => {
 
     function displayTodoDetails(event) {
         const todoItem = event.target;
-        if(todoItem.classList.contains("todo-item")) {
-            const todoID = todoItem.getAttribute("data-todoid");
+        if(todoItem.classList.contains("todo-item") || todoItem.classList.contains("todo-item-name")) {
+            let todoID;
+            if(todoItem.classList.contains("todo-item")) {
+                todoID = todoItem.getAttribute("data-todoid");
+            } else {
+                todoID = todoItem.parentNode.getAttribute("data-todoid");
+            }
             const todo = organizer.getTodoByID(todoID);
             userInterface.renderTodoItemDetails(todo);
         }
@@ -68,7 +75,22 @@ const displayController = (() => {
             const todoID = this.getAttribute("data-todoid");
             organizer.deleteTodoByID(todoID);
             userInterface.removeTodoItem(todoID);
-            userInterface.clearDetailsDisplay();
+            userInterface.toggleTodoModal();
+        }
+    }
+
+    function closeTodoModal(event) {
+        if(event.target.classList.contains("todo-modal") || event.target.id == "close-todo-modal-btn") {
+            userInterface.toggleTodoModal();
+        }
+    }
+
+    function checkTodo(event) {
+        const checkbox = event.target;
+        if(checkbox.classList.contains("checkbox")) {
+            const todoID = checkbox.parentNode.getAttribute("data-todoid")
+            userInterface.checkTodo(todoID);
+            organizer.getTodoByID(todoID).toggleChecked();
         }
     }
 
@@ -77,7 +99,9 @@ const displayController = (() => {
         createNewProject,
         createNewTodo,
         displayTodoDetails,
-        deleteTodo
+        deleteTodo,
+        closeTodoModal,
+        checkTodo
     };
 })();
 

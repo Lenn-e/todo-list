@@ -17,12 +17,12 @@ const organizer = (() => {
 
     const findProjectContainingTodoID = (ID) => {
         // look at all todos from all containers and return the container that includes the given todo ID
-        const temp = projectContainers.find(project => {
+        const project = projectContainers.find(project => {
             return project.getTodos().some(todo => {
                 return todo.getTodoID() === ID;
             });
         });
-        return temp;
+        return project;
     };
 
     const getTodoByID = (ID) => {
