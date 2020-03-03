@@ -8,9 +8,6 @@
     justify-content: space-evenly;
 }
 
-.organizer-component {
-}
-
 .project-menu {
     border: 1px solid black;
 }
@@ -46,10 +43,6 @@
 
 .todo-item:hover {
     background-color: #f0f0f0;
-}
-
-.priority-low {
-    background-color: ;
 }
 
 .checked {
@@ -120,10 +113,6 @@
 }
 .checkbox.checked.high {
     background-color: rgb(255, 189, 189);
-}
-
-.todo-item-name {
-    
 }
 
 .date-due {

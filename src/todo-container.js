@@ -1,7 +1,7 @@
-let projectIndex = 0;
+let projectIndex = localStorage.projectIndex || 0;
 
 const TodoContainer = (name) => {
-    const projectID = `project-${projectIndex++}`;
+    const projectID = `project-${localStorage.projectIndex = ++projectIndex}`;
     const todos = [];
 
     const getProjectID = () => {

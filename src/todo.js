@@ -1,7 +1,7 @@
-let todoIndex = 0;
+let todoIndex = localStorage.todoIndex || 0;
 
 const Todo = (text, dueDate, priority, note) => {
-    const todoID = `todo-${todoIndex++}`;
+    const todoID = `todo-${localStorage.todoIndex = ++todoIndex}`;
     let checked = false;
 
     const getTodoID = () => todoID;

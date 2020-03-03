@@ -42,3 +42,4 @@ const initializeOrganizer = (() => {
 })();
 
 /* console.log(dateFunctions.isDue('2020-03-04')); */
+localStorage.clear()

@@ -1,4 +1,4 @@
-import { format, compareAsc, parseISO } from "date-fns";
+import { compareAsc, parseISO } from "date-fns";
 
 const dateFunctions = (() => {
 
@@ -9,9 +9,7 @@ const dateFunctions = (() => {
     const isDue = (todoDate) => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        todoDate = convertToDateObj(todoDate);/* 
-        console.log({today, todoDate})
-        console.log(compareAsc(today, todoDate)); */
+        todoDate = convertToDateObj(todoDate);
         if(compareAsc(today, todoDate) < 0) {
             return false;
         }
@@ -19,8 +17,7 @@ const dateFunctions = (() => {
     }
 
     return {
-        isDue,
-        convertToDateObj
+        isDue
     };
 })();
 
