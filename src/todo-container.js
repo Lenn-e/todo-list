@@ -1,12 +1,17 @@
 let projectIndex = localStorage.projectIndex || 0;
 
 const TodoContainer = (name) => {
-    const projectID = `project-${localStorage.projectIndex = ++projectIndex}`;
+    let projectID = `project-${localStorage.projectIndex = ++projectIndex}`;
     const todos = [];
 
     const getProjectID = () => {
         return projectID;
     }
+
+    // used for restoring from local storage
+    /* const setProjectID = (ID) => {
+        projectID = ID;
+    } */
 
     const getName = () => {
         return name;
@@ -28,12 +33,22 @@ const TodoContainer = (name) => {
         todos.splice(index, 1);
     }
 
+    const exportForLocalStorage = () => {
+        const todosForExport = todos.map(todo => todo.exportForLocalStorage());
+
+        return {
+            name,
+            todos: todosForExport
+        };
+    }
+
     return {
         getProjectID,
         getTodos,
         addTodo,
         getName,
-        removeTodo
+        removeTodo,
+        exportForLocalStorage
     };
 };
 

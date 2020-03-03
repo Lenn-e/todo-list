@@ -3,7 +3,7 @@ import TodoContainer from './todo-container';
 import organizer from './organizer';
 import userInterface from './user-interface';
 import displayController from './display-controller';
-import dateFunctions from "./date-functions";
+import localStorageFunctions from './local-storage';
 
 import 'flatpickr/dist/flatpickr.min.css';
 
@@ -26,20 +26,23 @@ todoDetails.addEventListener('click', displayController.deleteTodo);
 todoModal.addEventListener('click', displayController.closeTodoModal);
 
 const initializeOrganizer = (() => {
-    const defaultContainer = TodoContainer("Stuff I need to do");
-    organizer.storeProjectContainer(defaultContainer)
+    if(localStorage.projectList) {
+        localStorageFunctions.restoreOrganizer();
+        userInterface.renderContainer(organizer.getProjectContainers()[0]);
+        userInterface.renderProjectList(organizer.getProjectContainers());
+    } else {
+        const defaultContainer = TodoContainer("Stuff I need to do");
+        organizer.storeProjectContainer(defaultContainer)
+        
+        const todo = Todo("some task", "2020-03-11", "low", "this is a note");
+        todo.toggleChecked();
+        defaultContainer.addTodo(todo);
+        defaultContainer.addTodo(Todo("proj 0", "2020-03-20", "medium", "this is a note too"));
+        defaultContainer.addTodo(Todo("do it", "2020-04-15", "low", "hello from the other side"));
+        defaultContainer.addTodo(Todo("hehe", "2020-03-03", "high", "badumts"));
+        defaultContainer.addTodo(Todo("oops", "2020-02-03", "high", "ripple"));
     
-    const todo = Todo("some task", "2020-03-11", "low", "this is a note");
-    todo.toggleChecked();
-    defaultContainer.addTodo(todo);
-    defaultContainer.addTodo(Todo("proj 0", "2020-03-20", "medium", "this is a note too"));
-    defaultContainer.addTodo(Todo("do it", "2020-04-15", "low", "hello from the other side"));
-    defaultContainer.addTodo(Todo("hehe", "2020-03-03", "high", "badumts"));
-    defaultContainer.addTodo(Todo("oops", "2020-02-03", "high", "ripple"));
-
-    userInterface.renderContainer(defaultContainer);
-    userInterface.renderProjectList([defaultContainer]);
+        userInterface.renderContainer(defaultContainer);
+        userInterface.renderProjectList([defaultContainer]);
+    }
 })();
-
-/* console.log(dateFunctions.isDue('2020-03-04')); */
-localStorage.clear()

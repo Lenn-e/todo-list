@@ -2,6 +2,7 @@ import userInterface from './user-interface';
 import organizer from './organizer';
 import TodoContainer from './todo-container';
 import Todo from './todo';
+import localStorageFunctions from './local-storage';
 
 const helperFunctions = (() => {
     const extractNewTodoInputs = (createTodoContainer) => {
@@ -41,6 +42,7 @@ const displayController = (() => {
             const project = TodoContainer(projectName);
             organizer.storeProjectContainer(project);
             userInterface.renderProjectListEntry(project);
+            localStorageFunctions.saveProjectListToLS();
         }
     }
 
@@ -53,6 +55,7 @@ const displayController = (() => {
             helperFunctions.saveTodo(todo, this.getAttribute("data-projectid"));
             // add it to the list display
             userInterface.renderTodoItem(todo);
+            localStorageFunctions.saveProjectListToLS();
         }
     }
 
@@ -76,6 +79,7 @@ const displayController = (() => {
             organizer.deleteTodoByID(todoID);
             userInterface.removeTodoItem(todoID);
             userInterface.toggleTodoModal();
+            localStorageFunctions.saveProjectListToLS();
         }
     }
 
@@ -91,6 +95,7 @@ const displayController = (() => {
             const todoID = checkbox.parentNode.getAttribute("data-todoid")
             userInterface.checkTodo(todoID);
             organizer.getTodoByID(todoID).toggleChecked();
+            localStorageFunctions.saveProjectListToLS();
         }
     }
 

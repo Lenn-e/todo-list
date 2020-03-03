@@ -1,10 +1,13 @@
 let todoIndex = localStorage.todoIndex || 0;
 
 const Todo = (text, dueDate, priority, note) => {
-    const todoID = `todo-${localStorage.todoIndex = ++todoIndex}`;
+    let todoID = `todo-${localStorage.todoIndex = ++todoIndex}`;
     let checked = false;
 
     const getTodoID = () => todoID;
+
+    // used for restoring from local storage
+    /* const setTodoID = (ID) => todoID = ID; */
 
     const getText = () => text || '';
 
@@ -20,6 +23,17 @@ const Todo = (text, dueDate, priority, note) => {
         checked = !checked;
     };
 
+    const exportForLocalStorage = () => {
+        return {
+            todoID,
+            text,
+            dueDate,
+            priority,
+            note,
+            checked
+        };
+    }
+
     return {
         getTodoID,
         getText,
@@ -28,6 +42,7 @@ const Todo = (text, dueDate, priority, note) => {
         getNote,
         isChecked,
         toggleChecked,
+        exportForLocalStorage
     };
 };
 
