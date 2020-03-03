@@ -1,4 +1,5 @@
 import flatpickr from "flatpickr";
+import dateFunctions from "./date-functions";
 
 const userInterfaceContainer = (() => {
     const todoListDisplay = document.querySelector(".project-todo-list");
@@ -16,8 +17,8 @@ const userInterfaceContainer = (() => {
             <div class="todo-item-name ${todo.isChecked() ? "checked" : ""}">
                 ${todo.getText()}
             </div>
-            <div class="date-due">
-                date due<br>${todo.getDueDate()}
+            <div class="date-due ${dateFunctions.isDue(todo.getDueDate()) ? "due" : ""}">
+                ${todo.getDueDate()}
             </div>
         </li>
         `
