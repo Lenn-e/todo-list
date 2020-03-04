@@ -6,6 +6,7 @@ import displayController from './display-controller';
 import localStorageFunctions from './local-storage';
 
 import 'flatpickr/dist/flatpickr.min.css';
+import dateFunctions from './date-functions';
 
 const projectListDisplay = document.querySelector(".project-list");
 const createProjectBtn = document.querySelector(".create-project-btn");

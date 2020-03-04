@@ -18,7 +18,7 @@ const userInterfaceContainer = (() => {
                 ${todo.getText()}
             </div>
             <div class="date-due ${dateFunctions.isDue(todo.getDueDate()) ? "due" : ""}">
-                ${todo.getDueDate()}
+                ${dateFunctions.formatDate(todo.getDueDate())}
             </div>
         </li>
         `

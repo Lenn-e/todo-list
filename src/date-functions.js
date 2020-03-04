@@ -1,4 +1,4 @@
-import { compareAsc, parseISO } from "date-fns";
+import { format, compareAsc, parseISO } from "date-fns";
 
 const dateFunctions = (() => {
 
@@ -16,8 +16,21 @@ const dateFunctions = (() => {
         return true;
     }
 
+
+    const formatDate = (todoDate) => {
+        const dateObj = convertToDateObj(todoDate);
+        let formattedDate = format(dateObj, 'd MMM yyyy');
+        // remove the year if the todo year matches current year
+        if(new Date().getFullYear() == dateObj.getFullYear()) {
+            formattedDate = formattedDate.replace(/ \d{4}/, '');
+        };
+        
+        return formattedDate;
+    }
+    
     return {
-        isDue
+        isDue,
+        formatDate
     };
 })();
 
