@@ -5,7 +5,7 @@ import userInterface from './user-interface';
 import displayController from './display-controller';
 import localStorageFunctions from './local-storage';
 
-import 'flatpickr/dist/flatpickr.min.css';
+import 'flatpickr/dist/themes/dark.css';
 import dateFunctions from './date-functions';
 
 const projectListDisplay = document.querySelector(".project-list");
@@ -21,10 +21,14 @@ createProjectBtn.addEventListener('click', displayController.createNewProject);
 projectNameInput.addEventListener('keydown', displayController.createNewProject);
 createTodoField.addEventListener('click', displayController.createNewTodo);
 createTodoField.addEventListener('keydown', displayController.createNewTodo);
+createTodoField.addEventListener('click', displayController.showTodoInputs);
 projectTodoList.addEventListener('click', displayController.displayTodoDetails);
 projectTodoList.addEventListener('click', displayController.checkTodo);
 todoDetails.addEventListener('click', displayController.deleteTodo);
+todoDetails.addEventListener('click', displayController.checkTodo);
+todoDetails.addEventListener('click', displayController.applyTodoChanges);
 todoModal.addEventListener('click', displayController.closeTodoModal);
+document.addEventListener('click', displayController.hideTodoInputs);
 
 const initializeOrganizer = (() => {
     if(localStorage.projectList) {

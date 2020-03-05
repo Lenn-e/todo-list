@@ -16,7 +16,6 @@ const dateFunctions = (() => {
         return true;
     }
 
-
     const formatDate = (todoDate) => {
         const dateObj = convertToDateObj(todoDate);
         let formattedDate = format(dateObj, 'd MMM yyyy');

@@ -1,3 +1,6 @@
+import flatpickr from "flatpickr";
+import dateFunctions from "./date-functions";
+
 const todoDetailsDisplay = document.querySelector(".todo-details");
 const todoModal = document.querySelector(".todo-modal");
 
@@ -10,15 +13,23 @@ const userInterfaceTodo = (() => {
 
     const renderTodoItemDetails = (todo) => {
         const html = `
-            <button id="close-todo-modal-btn">X</button>
-            <h2>${todo.getText()}</h2>
-            <p>${todo.getDueDate()}</p>\
-            <p>${todo.getPriority()}</p>\
-            <p>${todo.getNote()}</p>\
-            <button id="delete-todo-button">Delete</button>
+            <button clsas="details-item" id="close-todo-modal-btn">X</button>
+            <div class="todo-item details-item"  data-todoid="${todo.getTodoID()}">
+                <div class="checkbox ${todo.isChecked() ? "checked" : ""} ${todo.getPriority()} clickable">
+                </div>
+                <div class="todo-item-name ${todo.isChecked() ? "checked" : ""}">
+                    ${todo.getText()}
+                </div>
+            </div>
+            <input class="todo-due-date details-item" type="text" placeholder="${todo.getDueDate()}" readonly="readonly">
+            <textarea class="details-item todo-note">${todo.getNote()}</textarea>
+            <button class="details-item" id="change-todo-button">Apply Changes</button>
+            <button class="details-item" id="delete-todo-button">Delete</button>
         `;
+        
         todoDetailsDisplay.innerHTML = html;
         todoDetailsDisplay.setAttribute("data-todoid", todo.getTodoID());
+        flatpickr(".todo-due-date", {});
         toggleTodoModal();
     }
 

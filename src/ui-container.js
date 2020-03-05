@@ -5,8 +5,8 @@ const userInterfaceContainer = (() => {
     const todoListDisplay = document.querySelector(".project-todo-list");
     const createTodoField = document.querySelector(".create-todo-field");
 
-    const getTodoNodeByID = (ID) => {
-        return todoListDisplay.querySelector(`.todo-item[data-todoid=${ID}`);
+    const getTodoNodesByID = (ID, parentNode) => {
+        return parentNode.querySelectorAll(`.todo-item[data-todoid=${ID}`);
     }
 
     const createTodoItemHtml = (todo) => {
@@ -28,19 +28,22 @@ const userInterfaceContainer = (() => {
     const createTodoInputField = (container) => {
         // create input for name, dateDue, priority and note
         const html = `
-            <div class="input-name-field">
+            <div class="input-name-field todo-input">
                 <span class="create-todo-btn clickable">+</span>
-                <input id="todo-name" type="text" class="todo-input" placeholder="Todo name">
+                <input id="todo-name" type="text" class="" placeholder="Todo name">
             </div>
 
-            <input id="todo-due-date" class="todo-input" type="text" placeholder="Select Date" readonly="readonly">
-
-            <label for="priority">Set priority</label>
-            <select id="todo-priority" class="todo-input">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
+            <div class="todo-input date-priority-container">
+                <input id="todo-due-date" type="text" placeholder="Select Date" readonly="readonly">
+                <div>
+                    <p>Set priority<p>
+                    <select id="todo-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
 
             <input id="todo-note" class="todo-input" placeholder="Write a note" type="text">
         `;
@@ -48,7 +51,7 @@ const userInterfaceContainer = (() => {
         createTodoField.setAttribute("data-projectid", container.getProjectID());
         createTodoField.innerHTML = html;
 
-        flatpickr("#todo-due-date", {});
+        flatpickr("#todo-due-date", {defaultDate: new Date()});
     }
 
     const renderContainer = (container) => {
@@ -66,14 +69,16 @@ const userInterfaceContainer = (() => {
     }
 
     const removeTodoItem = (todoID) => {
-        const todo = getTodoNodeByID(todoID);
+        const todo = getTodoNodesByID(todoID, todoListDisplay)[0];
         todoListDisplay.removeChild(todo);
     }
 
     const checkTodo = (todoID) => {
-        const todo = getTodoNodeByID(todoID);
-        todo.querySelector(".checkbox").classList.toggle("checked");
-        todo.querySelector(".todo-item-name").classList.toggle("checked");
+        const todoNodes = getTodoNodesByID(todoID, document);
+        todoNodes.forEach(todoNode => {
+            todoNode.querySelector(".checkbox").classList.toggle("checked");
+            todoNode.querySelector(".todo-item-name").classList.toggle("checked");
+        });
     }
 
     return {

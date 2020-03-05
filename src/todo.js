@@ -23,6 +23,10 @@ const Todo = (text, dueDate, priority, note) => {
         checked = !checked;
     };
 
+    const setDueDate = (newDate) => dueDate = newDate;
+
+    const setNote = (newNote) => note = newNote;
+
     const exportForLocalStorage = () => {
         return {
             todoID,
@@ -40,6 +44,8 @@ const Todo = (text, dueDate, priority, note) => {
         getDueDate,
         getPriority,
         getNote,
+        setDueDate,
+        setNote,
         isChecked,
         toggleChecked,
         exportForLocalStorage

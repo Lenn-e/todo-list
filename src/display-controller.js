@@ -21,15 +21,48 @@ const helperFunctions = (() => {
         currentProject.addTodo(todo);
     }
 
+    const checkForEmptyValues = (valuesObj) => {
+        return Object.keys(valuesObj).some(key => {
+            if(!valuesObj[key]) {
+                alert("Please choose a valid " + key);
+                return true;
+            }
+        });
+    }
+
+    const extractTodoChanges = (todoDetailsContainer) => {
+        const newValues = {};
+        newValues.dueDate = todoDetailsContainer.querySelector(".todo-due-date").value;
+        newValues.note = todoDetailsContainer.querySelector(".todo-note").value;
+        return newValues;
+    }
+
+    const saveTodoChanges = (todo, newValues) => {
+        Object.keys(newValues).forEach(key => {
+            if(newValues[key]) {
+                todo[`set${key.charAt(0).toUpperCase() + key.slice(1)}`](newValues[key]);
+            }
+        });
+    }
+
+    const refreshCurrentProject = () => {
+        const projectID = document.querySelector(".create-todo-field").getAttribute('data-projectid');
+        const container = organizer.getProjectContainer(projectID);
+        userInterface.renderContainer(container);
+    }
+
     return {
         extractNewTodoInputs,
-        saveTodo
+        saveTodo,
+        checkForEmptyValues,
+        extractTodoChanges,
+        saveTodoChanges,
+        refreshCurrentProject,
+        
     };
 })();
 
 const displayController = (() => {
-    const projectNameInput = document.querySelector(".project-name-input");
-
     function displayContainer(event) {
         let container = event.target;
         container = organizer.getProjectContainer(event.target.id);
@@ -38,7 +71,11 @@ const displayController = (() => {
 
     function createNewProject(event) {
         if(event.target.classList.contains("create-project-btn") || event.code == 'Enter') {
+            const projectNameInput = document.querySelector(".project-name-input");
             const projectName = projectNameInput.value;
+            if(helperFunctions.checkForEmptyValues({projectName})) {
+                return;
+            }
             const project = TodoContainer(projectName);
             organizer.storeProjectContainer(project);
             userInterface.renderProjectListEntry(project);
@@ -50,6 +87,9 @@ const displayController = (() => {
         if(event.target.classList.contains("create-todo-btn") || event.code == 'Enter') {
             // get inputs from DOM and create new todo
             let todo = helperFunctions.extractNewTodoInputs(this);
+            if(helperFunctions.checkForEmptyValues(todo)) {
+                return;
+            }
             todo = Todo(...Object.values(todo));
             // store it into the currently open project
             helperFunctions.saveTodo(todo, this.getAttribute("data-projectid"));
@@ -71,6 +111,7 @@ const displayController = (() => {
             const todo = organizer.getTodoByID(todoID);
             userInterface.renderTodoItemDetails(todo);
         }
+        event.stopPropagation();
     }
 
     function deleteTodo(event) {
@@ -83,6 +124,18 @@ const displayController = (() => {
         }
     }
 
+    function applyTodoChanges(event) {
+        if(event.target.id === "change-todo-button") {
+            const todoID = this.getAttribute("data-todoid");
+            const todo = organizer.getTodoByID(todoID);
+            const newValues = helperFunctions.extractTodoChanges(this);
+            helperFunctions.saveTodoChanges(todo, newValues);
+            helperFunctions.refreshCurrentProject();
+            userInterface.toggleTodoModal();
+            localStorageFunctions.saveProjectListToLS();
+        }
+    }
+    
     function closeTodoModal(event) {
         if(event.target.classList.contains("todo-modal") || event.target.id == "close-todo-modal-btn") {
             userInterface.toggleTodoModal();
@@ -97,6 +150,20 @@ const displayController = (() => {
             organizer.getTodoByID(todoID).toggleChecked();
             localStorageFunctions.saveProjectListToLS();
         }
+        
+    }
+
+    function showTodoInputs(event) {
+        if(event.target.id == "todo-name") {
+            // add border and background to name input field
+            // remove display none class from date, priority and note inputs
+            this.querySelectorAll(".todo-input").forEach(input => input.classList.add("active"));
+        }
+        event.stopPropagation();
+    }
+
+    function hideTodoInputs(event) {
+        this.querySelectorAll(".todo-input").forEach(input => input.classList.remove("active"));
     }
 
     return{
@@ -105,8 +172,11 @@ const displayController = (() => {
         createNewTodo,
         displayTodoDetails,
         deleteTodo,
+        applyTodoChanges,
         closeTodoModal,
-        checkTodo
+        checkTodo,
+        showTodoInputs,
+        hideTodoInputs
     };
 })();
 
