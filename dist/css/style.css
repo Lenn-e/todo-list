@@ -1,3 +1,13 @@
+:root {
+    --teal: #80cbc4;
+    --light-gray: #282828;
+    --hover-gray: #363636;
+    --dark-gray: #1f1f1f;
+    --darker-gray: #1b1b1b;
+    --tinted-white: rgb(230, 230, 230);
+    --flat-blue: #3f4458;
+}
+
 body, html {
     height: 100%;
 }
@@ -5,19 +15,27 @@ body, html {
 header {
     display: flex;
     align-items: center;
-    background-color: #282828;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3);
-    height: 40px;
-    padding: 10px;
+    background-color: var(--light-gray);
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    height: 45px;
+    width: 100%;
+    padding: 10px 0 10px 40px;
 }
 
 #logo {
     font-family: 'Raleway', sans-serif;
     font-size: 1.7rem;
-    color: #80cbc4;
+    color: var(--teal);
+}
+
+#logo > span {
+    color: var(--tinted-white);
+    vertical-align: middle;
 }
 
 .outter-container {
+    display: flex;
+    flex-direction: column;
     background: #7e7e7e;
     min-height: 100%;
 }
@@ -29,62 +47,188 @@ header {
 
 .organizer-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: var(--light-gray);
 }
 
 .project-menu {
-    border: 1px solid black;
+    width: 300px;
+    background-color: var(--light-gray);
+    color: var(--tinted-white);
+    margin-right: 3px;
 }
 
-.input-name-field {
-    display: flex;
-    align-items: center;
-    height: 50px;
+.project-menu > h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 5px 0;
+    background-color: var(--flat-blue);
+    border-radius: 3px;
 }
 
 .project-list-item {
+    position: relative;
     height: 40px;
     line-height: 40px;
-    border: 1px solid black;
+    padding: 0 20px;
+    transition: 0.2s;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    border-radius: 3px;
+}
+
+.project-list-item::before {
+    content: '';
+    position: absolute;
+    height: 5px;
+    width: 2px;
+    background: white;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: 0.2s;
+    transform-origin: 50%;
+}
+
+.project-list-item:hover {
+    background-color: var(--hover-gray);
+}
+
+.project-list-item:hover::before {
+    height: 25px;
+    width: 3px;
+}
+
+.create-project-field {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin: 20px 0 0 0;
+}
+
+.name-input {
+    width: 250px;
+}
+
+.input-gray {
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    color: var(--tinted-white);
+    padding: 10px;
+    background-color: var(--hover-gray);
+    border: 2px solid transparent !important;
+    border-radius: 3px !important;
+}
+
+.input-gray:focus {
+    outline: none !important;
+    border: 2px solid var(--flat-blue) !important;
+}
+
+.create-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--tinted-white);
+    font-size: 1.5rem;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.create-btn:hover {
+    border: 2px solid var(--teal);
+    color: var(--teal);
 }
 
 .current-project {
-    border: 1px solid black;
-    flex-grow: 0;
+    width: 750px;
+    min-height: 100%;
+    background-color: var(--dark-gray);
+    padding: 40px 50px;
 }
 
 .create-todo-field {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .todo-input {
     display: none;
+    margin-top: 20px;
 }
 
 .todo-input:nth-child(1) {
-    display: initial;
-    height: 30px;
+    margin-top:0px;
+    display: flex;
+    align-items: center;
 }
 
 .todo-input.active {
-    display: initial;
+    display: flex;
+    align-items: center;
+}
+
+#todo-due-date {
+    width: 200px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+#todo-priority {
+    font-size: 0.9rem;
+}
+#todo-priority option:nth-child(2) {
+    color: rgb(92, 160, 248);
+}
+#todo-priority option:nth-child(3) {
+    color: rgb(248, 186, 70);
+}
+#todo-priority option:nth-child(4) {
+    color: rgb(248, 109, 109);
+}
+
+#todo-note {
+    width: 320px;
+    height: 100px;
+    line-height: normal;
+    font-size: 1rm;
+    resize: none;
+}
+
+.project-todo-list {
+    margin-top: 50px;
 }
 
 .todo-item {
     display: flex;
     align-items: center;
-    height: 40px;
-    border: 1px solid black;
+    height: 60px;
+    padding: 0 30px;
+    border-bottom: 1px solid var(--flat-blue);
+    font-family: 'Roboto', sans-serif;
 }
 
 .todo-item:hover {
-    background-color: rgb(31, 31, 31);
+    background-color: var(--darker-gray);
 }
 
 .todo-item-name {
+    margin-left: 20px;
     position: relative;
-    color: white;
+    color: var(--tinted-white);
 }
 
 .todo-item-name::before {
@@ -92,13 +236,40 @@ header {
     position: absolute;
     height:2px;
     width: 0;
-    background: white;
+    background: var(--tinted-white);
     top: 50%;
     transition: 0.3s;
 }
 
 .todo-item-name.checked::before {
     width:100%;
+}
+
+.todo-item .delete-todo-button {
+    color: var(--tinted-white);
+    font-size: 1.2rem;
+}
+.todo-item .delete-todo-button:hover {
+    color: rgb(251, 111, 111);
+} 
+
+.todo-details-button {
+    margin-left: auto;
+    color: var(--tinted-white);
+    font-size: 1.2rem;
+}
+.todo-details-button:hover {
+    color: var(--teal);
+}
+
+.date-due {
+    color: var(--tinted-white);
+    width: 80px;
+    text-align: center;
+}
+
+.due {
+    color: rgb(251, 111, 111);
 }
 
 .checkbox {
@@ -111,8 +282,14 @@ header {
     transition: all 0.5s, background-color 0s;
 }
 
+.checkbox.checked {
+    border-radius: 100%;
+    background-color: transparent;
+    border-color: var(--teal);
+}
+
 .checkbox:hover {
-    background-color: #f0f0f0;
+    background-color: var(--hover-gray);
 }
 
 .checkbox.checked:hover {
@@ -130,7 +307,7 @@ header {
     visibility: visible;
     width: 15px;
     height: 6px;
-    border-color: rgb(255, 255, 255) !important;
+    border-color: var(--tinted-white) !important;
 }
 
 .checkbox::before {
@@ -141,11 +318,11 @@ header {
     content: "";
     width: 15px;
     height: 6px;
-    border-color: white;
+    border-color: var(--tinted-white);
     border-style: solid;
     border-width: 0 0 3px 3px;
     transform: rotate(-45deg);
-    transition: all 0.3s, visibility 0s;
+    transition: all 0.3s, visibility 0s, border 0s;
     overflow: hidden;
 }
 
@@ -158,18 +335,6 @@ header {
 .high {
     border-color: rgb(248, 109, 109);
 }
-.checkbox.checked {
-    border-radius: 100%;
-}
-
-.date-due {
-    margin-left: auto;
-    cursor: auto;
-}
-
-.due {
-    color: rgb(251, 111, 111);
-}
 
 .todo-modal {
     display: none;
@@ -177,7 +342,6 @@ header {
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
-   
 }
 
 .show-todo-modal {
@@ -187,22 +351,81 @@ header {
 .todo-details {
     display: flex;
     flex-direction: column;
-    background: #c2c2c2;
-    margin: 100px auto;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
+    justify-content: space-evenly;
+    background-color: var(--dark-gray);
+    margin: 10% auto;
+    padding: 0 30px;
+    width: 600px;
+    height: 400px;
+    border-radius: 5px;
+    animation: show-details 0.3s forwards;
+    transform: translateY(-10%);
+    opacity: 0.5;
+}
+
+@keyframes show-details {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .details-item {
-    border: none;
-    background-color: transparent;
-    resize: none;
-    border-top: 1px solid gray;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+    
+#close-todo-modal-btn {
+    align-self: flex-end;
+    color: var(--tinted-white);
+    font-size: 1.5rem;
 }
 
-.details-item:hover {
-    background-color: transparent;
+#details-name {
+    border-bottom: 1px solid var(--flat-blue);
+    height: 60px;
+    padding: 0 30px;
+}
+
+#details-name:hover {
+    background-color: initial;
+}
+
+#details-date {
+    width: 300px;
+    text-align: center;
+}
+
+#details-note {
+    resize: none;
+    height: 100px;
+    width: 100%;
+    line-height: normal;
+}
+
+#details-button-container {
+    align-self: center;
+    justify-content: space-evenly;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.details-button {
+    color: var(--tinted-white);
+    background-color: var(--flat-blue);
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.details-button:hover {
+    background-color: #383c4d;
 }
 
 

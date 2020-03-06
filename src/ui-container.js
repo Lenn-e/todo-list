@@ -11,14 +11,20 @@ const userInterfaceContainer = (() => {
 
     const createTodoItemHtml = (todo) => {
         const html = `
-        <li class="todo-item clickable" data-todoid="${todo.getTodoID()}">
-            <div class="checkbox ${todo.isChecked() ? "checked" : ""} ${todo.getPriority()}">
+        <li class="todo-item" data-todoid="${todo.getTodoID()}">
+            <div class="checkbox clickable ${todo.isChecked() ? "checked" : ""} ${todo.getPriority()}">
             </div>
             <div class="todo-item-name ${todo.isChecked() ? "checked" : ""}">
                 ${todo.getText()}
             </div>
+            <div class="todo-details-button clickable">
+                <i class="fas fa-info-circle"></i>
+            </div>
             <div class="date-due ${dateFunctions.isDue(todo.getDueDate()) ? "due" : ""}">
                 ${dateFunctions.formatDate(todo.getDueDate())}
+            </div>
+            <div class="delete-todo-button clickable">
+                <i class="fas fa-trash-alt"></i>
             </div>
         </li>
         `
@@ -29,15 +35,15 @@ const userInterfaceContainer = (() => {
         // create input for name, dateDue, priority and note
         const html = `
             <div class="input-name-field todo-input">
-                <span class="create-todo-btn clickable">+</span>
-                <input id="todo-name" type="text" class="" placeholder="Todo name">
+                <span class="create-btn create-todo-btn clickable">+</span>
+                <input id="todo-name" type="text" class="name-input todo-name-input input-gray" placeholder="New Todo" autocomplete="off">
             </div>
 
             <div class="todo-input date-priority-container">
-                <input id="todo-due-date" type="text" placeholder="Select Date" readonly="readonly">
+                <input id="todo-due-date" class="input-gray" type="text" placeholder="Select Date" readonly="readonly">
                 <div>
-                    <p>Set priority<p>
-                    <select id="todo-priority">
+                    <select id="todo-priority" class="input-gray clickable">
+                        <option value="" disabled selected>Priority</option>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
@@ -45,7 +51,7 @@ const userInterfaceContainer = (() => {
                 </div>
             </div>
 
-            <input id="todo-note" class="todo-input" placeholder="Write a note" type="text">
+            <textarea id="todo-note" class="todo-input input-gray" placeholder="Write a note" type="text"></textarea>
         `;
         
         createTodoField.setAttribute("data-projectid", container.getProjectID());

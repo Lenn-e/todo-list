@@ -32,8 +32,8 @@ const helperFunctions = (() => {
 
     const extractTodoChanges = (todoDetailsContainer) => {
         const newValues = {};
-        newValues.dueDate = todoDetailsContainer.querySelector(".todo-due-date").value;
-        newValues.note = todoDetailsContainer.querySelector(".todo-note").value;
+        newValues.dueDate = todoDetailsContainer.querySelector("#details-date").value;
+        newValues.note = todoDetailsContainer.querySelector("#details-note").value;
         return newValues;
     }
 
@@ -100,26 +100,23 @@ const displayController = (() => {
     }
 
     function displayTodoDetails(event) {
-        const todoItem = event.target;
-        if(todoItem.classList.contains("todo-item") || todoItem.classList.contains("todo-item-name")) {
+        const target = event.target;
+        if(target.closest(".todo-details-button")) {
             let todoID;
-            if(todoItem.classList.contains("todo-item")) {
-                todoID = todoItem.getAttribute("data-todoid");
-            } else {
-                todoID = todoItem.parentNode.getAttribute("data-todoid");
-            }
+            todoID = target.closest(".todo-item").getAttribute("data-todoid");
             const todo = organizer.getTodoByID(todoID);
             userInterface.renderTodoItemDetails(todo);
         }
-        event.stopPropagation();
     }
 
     function deleteTodo(event) {
-        if(event.target.id === "delete-todo-button") {
-            const todoID = this.getAttribute("data-todoid");
+        if(event.target.classList.contains("delete-todo-button") || event.target.closest(".delete-todo-button")) {
+            const todoID = this.getAttribute("data-todoid") || event.target.closest(".todo-item").getAttribute("data-todoid");
             organizer.deleteTodoByID(todoID);
             userInterface.removeTodoItem(todoID);
-            userInterface.toggleTodoModal();
+            if(!this.classList.contains("project-todo-list")) {
+                userInterface.toggleTodoModal();
+            }
             localStorageFunctions.saveProjectListToLS();
         }
     }
@@ -137,7 +134,7 @@ const displayController = (() => {
     }
     
     function closeTodoModal(event) {
-        if(event.target.classList.contains("todo-modal") || event.target.id == "close-todo-modal-btn") {
+        if(event.target.classList.contains("todo-modal") || event.target.closest("#close-todo-modal-btn")) {
             userInterface.toggleTodoModal();
         }
     }
@@ -159,7 +156,6 @@ const displayController = (() => {
             // remove display none class from date, priority and note inputs
             this.querySelectorAll(".todo-input").forEach(input => input.classList.add("active"));
         }
-        event.stopPropagation();
     }
 
     function hideTodoInputs(event) {
