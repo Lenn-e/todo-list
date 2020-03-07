@@ -7,6 +7,12 @@ const organizer = (() => {
         projectContainers.push(project);
     };
 
+    const deleteProjectContainer = (projectID) => {
+        const project = getProjectContainer(projectID);
+        const projectIndex = projectContainers.indexOf(project);
+        projectContainers.splice(projectIndex, 1);
+    };
+
     const getProjectContainers = () => projectContainers;
 
     const findProjectContainingTodoID = (ID) => {
@@ -32,7 +38,8 @@ const organizer = (() => {
         storeProjectContainer,
         getProjectContainers,
         getTodoByID,
-        deleteTodoByID
+        deleteTodoByID,
+        deleteProjectContainer
     }
 })();
 

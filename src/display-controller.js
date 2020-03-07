@@ -64,8 +64,8 @@ const helperFunctions = (() => {
 
 const displayController = (() => {
     function displayContainer(event) {
-        let container = event.target;
-        container = organizer.getProjectContainer(event.target.id);
+        let container = event.target.closest(".project-list-item");
+        container = organizer.getProjectContainer(container.id);
         userInterface.renderContainer(container);
         userInterface.highlightProjectItem(container.getProjectID());
     }
@@ -84,6 +84,23 @@ const displayController = (() => {
             userInterface.renderContainer(project);
             localStorageFunctions.saveProjectListToLS();
             this.value = "";
+        }
+    }
+
+    function deleteProject(event) {
+        if(event.target.closest(".delete-project-btn")) {
+            const projectID = event.target.closest(".project-list-item").id;
+            organizer.deleteProjectContainer(projectID);
+            const projects = organizer.getProjectContainers();
+            if(projects.length > 0) {
+                userInterface.renderProjectList(projects);
+                userInterface.highlightProjectItem(projects[0].getProjectID());
+                userInterface.renderContainer(projects[0]);
+            } else {
+                userInterface.renderProjectList(projects);
+                userInterface.clearProjectDisplay();
+            }
+            localStorageFunctions.saveProjectListToLS();
         }
     }
 
@@ -177,7 +194,8 @@ const displayController = (() => {
         closeTodoModal,
         checkTodo,
         showTodoInputs,
-        hideTodoInputs
+        hideTodoInputs,
+        deleteProject
     };
 })();
 

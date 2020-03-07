@@ -4,7 +4,8 @@ const userInterfaceMenu = (() => {
     const createProjectListItemHtml = (container) => {
         return `
         <li class="project-list-item clickable" id="${container.getProjectID()}">
-            ${container.getName()}
+            <p>${container.getName()}</p>
+            <div class="delete-project-btn"><i class="fas fa-times"></i></div>
         </li>`;
     };
 

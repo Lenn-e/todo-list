@@ -18,6 +18,7 @@ const todoDetails = document.querySelector(".todo-details");
 const todoModal = document.querySelector(".todo-modal");
 
 projectListDisplay.addEventListener('click', displayController.displayContainer);
+projectListDisplay.addEventListener('click', displayController.deleteProject);
 createProjectBtn.addEventListener('click', displayController.createNewProject);
 projectNameInput.addEventListener('keydown', displayController.createNewProject);
 createTodoField.addEventListener('click', displayController.createNewTodo);
@@ -34,9 +35,11 @@ todoModal.addEventListener('click', displayController.closeTodoModal);
 const initializeOrganizer = (() => {
     if(localStorage.projectList) {
         localStorageFunctions.restoreOrganizer();
-        userInterface.renderContainer(organizer.getProjectContainers()[0]);
-        userInterface.renderProjectList(organizer.getProjectContainers());
-        userInterface.highlightProjectItem(organizer.getProjectContainers()[0].getProjectID());
+        if(organizer.getProjectContainers().length > 0) {
+            userInterface.renderContainer(organizer.getProjectContainers()[0]);
+            userInterface.renderProjectList(organizer.getProjectContainers());
+            userInterface.highlightProjectItem(organizer.getProjectContainers()[0].getProjectID());
+        }
     } else {
         const defaultContainer = TodoContainer("Get started");
         organizer.storeProjectContainer(defaultContainer)

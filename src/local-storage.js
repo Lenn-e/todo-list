@@ -25,7 +25,8 @@ const localStorageFunctions = (() => {
     }
 
     const restoreProjectList = () => {
-        const projectList = JSON.parse(localStorage.getItem('projectList')).map(project => {
+        let projectList = JSON.parse(localStorage.getItem('projectList'));
+        projectList = projectList.map(project => {
             const restoredProject = TodoContainer(project.name);
             project.todos.forEach(todoLS => {
                 const restoredTodo = restoreTodo(todoLS);
@@ -35,7 +36,6 @@ const localStorageFunctions = (() => {
 
             return restoredProject;
         });
-        
         return projectList;
     }
 
