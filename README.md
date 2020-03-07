@@ -1,2 +1,2 @@
-# todo-list
+# JustTodo
 Minimalistic todo list app
