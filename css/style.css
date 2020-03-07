@@ -53,6 +53,8 @@ header {
 }
 
 .project-menu {
+    display: flex;
+    flex-direction: column;
     width: 300px;
     background-color: var(--light-gray);
     color: var(--tinted-white);
@@ -60,12 +62,14 @@ header {
 }
 
 .project-menu > h3 {
+    align-self: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     height: 40px;
+    width: 100%;
     line-height: 40px;
     text-align: center;
-    margin: 5px 0;
+    margin: 20px 0 10px 0;
     background-color: var(--flat-blue);
     border-radius: 3px;
 }
@@ -81,7 +85,6 @@ header {
     font-weight: 400;
     border-radius: 3px;
 }
-
 .project-list-item::before {
     content: '';
     position: absolute;
@@ -94,14 +97,20 @@ header {
     transition: 0.2s;
     transform-origin: 50%;
 }
-
 .project-list-item:hover {
     background-color: var(--hover-gray);
 }
-
 .project-list-item:hover::before {
     height: 25px;
     width: 3px;
+}
+.project-list-item.selected {
+    background-color: var(--hover-gray);
+}
+.project-list-item.selected::before {
+    height: 25px;
+    width: 3px;
+    background-color: var(--teal);
 }
 
 .create-project-field {
@@ -228,16 +237,19 @@ header {
 .todo-item-name {
     margin-left: 20px;
     position: relative;
+    height: 50px;
+    line-height: 50px;
     color: var(--tinted-white);
 }
 
 .todo-item-name::before {
     content:'';
     position: absolute;
-    height:2px;
+    height: 2px;
     width: 0;
     background: var(--tinted-white);
     top: 50%;
+    transform: translateY(-50%);
     transition: 0.3s;
 }
 
