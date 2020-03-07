@@ -89,18 +89,20 @@ const displayController = (() => {
 
     function deleteProject(event) {
         if(event.target.closest(".delete-project-btn")) {
-            const projectID = event.target.closest(".project-list-item").id;
-            organizer.deleteProjectContainer(projectID);
-            const projects = organizer.getProjectContainers();
-            if(projects.length > 0) {
-                userInterface.renderProjectList(projects);
-                userInterface.highlightProjectItem(projects[0].getProjectID());
-                userInterface.renderContainer(projects[0]);
-            } else {
-                userInterface.renderProjectList(projects);
-                userInterface.clearProjectDisplay();
+            if (confirm('Are you sure you want to delete this project?')) {
+                const projectID = event.target.closest(".project-list-item").id;
+                organizer.deleteProjectContainer(projectID);
+                const projects = organizer.getProjectContainers();
+                if(projects.length > 0) {
+                    userInterface.renderProjectList(projects);
+                    userInterface.highlightProjectItem(projects[0].getProjectID());
+                    userInterface.renderContainer(projects[0]);
+                } else {
+                    userInterface.renderProjectList(projects);
+                    userInterface.clearProjectDisplay();
+                }
+                localStorageFunctions.saveProjectListToLS();
             }
-            localStorageFunctions.saveProjectListToLS();
         }
     }
 
