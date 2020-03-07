@@ -75,6 +75,7 @@ header {
 }
 
 .project-list-item {
+    display: flex;
     position: relative;
     height: 40px;
     line-height: 40px;
@@ -111,6 +112,20 @@ header {
     height: 25px;
     width: 3px;
     background-color: var(--teal);
+}
+.project-list-item:hover .delete-project-btn {
+    display: block;
+}
+
+.delete-project-btn {
+    display: none;
+    margin-left: auto;
+    color: var(--tinted-white);
+    transition: 0.2s;
+}
+
+.delete-project-btn:hover {
+    color: rgb(248, 109, 109);
 }
 
 .create-project-field {
