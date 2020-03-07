@@ -16,11 +16,6 @@ const userInterfaceMenu = (() => {
         projectListDisplay.innerHTML = html;
     };
 
-    const renderProjectListEntry = (container) => {
-        const listItem = createProjectListItemHtml(container);
-        projectListDisplay.innerHTML += listItem;
-    }
-
     const highlightProjectItem = (containerID) => {
         projectListDisplay.childNodes.forEach(projectItem => {
             // ignore text nodes (type = 3)
@@ -36,7 +31,6 @@ const userInterfaceMenu = (() => {
 
     return {
         renderProjectList,
-        renderProjectListEntry,
         highlightProjectItem
     };
 })();

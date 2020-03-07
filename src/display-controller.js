@@ -79,10 +79,11 @@ const displayController = (() => {
             }
             const project = TodoContainer(projectName);
             organizer.storeProjectContainer(project);
-            userInterface.renderProjectListEntry(project);
+            userInterface.renderProjectList(organizer.getProjectContainers());
             userInterface.highlightProjectItem(project.getProjectID());
             userInterface.renderContainer(project);
             localStorageFunctions.saveProjectListToLS();
+            this.value = "";
         }
     }
 
