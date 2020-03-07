@@ -38,16 +38,16 @@ const initializeOrganizer = (() => {
         userInterface.renderProjectList(organizer.getProjectContainers());
         userInterface.highlightProjectItem(organizer.getProjectContainers()[0].getProjectID());
     } else {
-        const defaultContainer = TodoContainer("Stuff I need to do");
+        const defaultContainer = TodoContainer("Get started");
         organizer.storeProjectContainer(defaultContainer)
         
-        const todo = Todo(`Decide to get stuff done`, dateFunctions.daysFromToday(0), "low", "this is a note");
+        const todo = Todo(`Decide to get stuff done`, dateFunctions.daysFromToday(0), "high", "This is a note.");
         todo.toggleChecked();
         defaultContainer.addTodo(todo);
-        defaultContainer.addTodo(Todo(`Click on the <i class="fas fa-info-circle"></i> icon to expand details`, dateFunctions.daysFromToday(0), "medium", "this is a note too"));
-        defaultContainer.addTodo(Todo(`Check off items by clicking on the colored squares`, dateFunctions.daysFromToday(0), "low", "hello from the other side"));
-        defaultContainer.addTodo(Todo(`Delete items by clicking on the <i class="fas fa-trash-alt"></i> icon`, dateFunctions.daysFromToday(0), "high", "badumts"));
-        defaultContainer.addTodo(Todo(`Become a master of productivity`, dateFunctions.daysFromToday(30), "high", "ripplee"));
+        defaultContainer.addTodo(Todo(`Click on the <i class="fas fa-info-circle"></i> icon to expand details`, dateFunctions.daysFromToday(0), "medium", "You can change details here. Press the save button to save any changes."));
+        defaultContainer.addTodo(Todo(`Check off items by clicking on the colored squares`, dateFunctions.daysFromToday(0), "low", "Checkboxes have different colors depending on the pirority of the todo."));
+        defaultContainer.addTodo(Todo(`Delete items by clicking on the <i class="fas fa-trash-alt"></i> icon`, dateFunctions.daysFromToday(0), "high", "Press the delete button to delete the todo."));
+        defaultContainer.addTodo(Todo(`Become a master of productivity`, dateFunctions.daysFromToday(30), "high", "Get into the habit of using this app every day and become a master of productivity!"));
         
         userInterface.renderContainer(defaultContainer);
         userInterface.renderProjectList([defaultContainer]);
