@@ -95,9 +95,10 @@ const displayController = (() => {
             }
             todo = Todo(...Object.values(todo));
             // store it into the currently open project
-            helperFunctions.saveTodo(todo, this.getAttribute("data-projectid"));
+            const currentProjectID = this.getAttribute("data-projectid");
+            helperFunctions.saveTodo(todo, currentProjectID);
             // add it to the list display
-            userInterface.renderTodoItem(todo);
+            userInterface.renderContainer(organizer.getProjectContainer(currentProjectID));
             localStorageFunctions.saveProjectListToLS();
         }
     }

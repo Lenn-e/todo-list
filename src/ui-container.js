@@ -69,11 +69,6 @@ const userInterfaceContainer = (() => {
         todoListDisplay.innerHTML = html;
     }
 
-    const renderTodoItem = (todo) => {
-        const todoItemHtml = createTodoItemHtml(todo);
-        todoListDisplay.innerHTML += todoItemHtml;
-    }
-
     const removeTodoItem = (todoID) => {
         const todo = getTodoNodesByID(todoID, todoListDisplay)[0];
         todoListDisplay.removeChild(todo);
@@ -89,7 +84,6 @@ const userInterfaceContainer = (() => {
 
     return {
         renderContainer,
-        renderTodoItem,
         removeTodoItem,
         checkTodo
     };
