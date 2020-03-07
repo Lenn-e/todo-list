@@ -1,16 +1,13 @@
 import flatpickr from "flatpickr";
-import dateFunctions from "./date-functions";
 
 const todoDetailsDisplay = document.querySelector(".todo-details");
 const todoModal = document.querySelector(".todo-modal");
-const todoDetails = document.querySelector(".todo-details");
 
 const userInterfaceTodo = (() => {
     const clearDetailsDisplay = () => todoDetailsDisplay.innerHTML = '';
 
     const toggleTodoModal = () => {
         todoModal.classList.toggle("show-todo-modal");
-        /* todoDetails.classList.toggle("show-details"); */
     }
 
     const renderTodoItemDetails = (todo) => {
@@ -26,7 +23,7 @@ const userInterfaceTodo = (() => {
             <input class="details-item input-gray" id="details-date" type="text" value="${todo.getDueDate()}" readonly="readonly">
             <textarea class="details-item input-gray" id="details-note">${todo.getNote()}</textarea>
             <div class="details-item" id="details-button-container">
-                <div class="details-button clickable"id="change-todo-button">Apply</div>
+                <div class="details-button clickable"id="change-todo-button">Save</div>
                 <div class="details-button delete-todo-button clickable">Delete</div>
             </div>
         `;

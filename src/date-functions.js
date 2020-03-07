@@ -1,4 +1,4 @@
-import { format, compareAsc, parseISO } from "date-fns";
+import { format, compareAsc, parseISO, add } from "date-fns";
 
 const dateFunctions = (() => {
 
@@ -26,10 +26,21 @@ const dateFunctions = (() => {
         
         return formattedDate;
     }
+
+    const formatDateSimple = (dateObj) => {
+        return format(dateObj, 'yyyy-MM-dd');
+    }
+
+    const daysFromToday = (days) => {
+        const today = new Date();
+        const newDate = add(today, {days});
+        return formatDateSimple(newDate);
+    }
     
     return {
         isDue,
-        formatDate
+        formatDate,
+        daysFromToday
     };
 })();
 

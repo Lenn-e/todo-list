@@ -21,9 +21,23 @@ const userInterfaceMenu = (() => {
         projectListDisplay.innerHTML += listItem;
     }
 
+    const highlightProjectItem = (containerID) => {
+        projectListDisplay.childNodes.forEach(projectItem => {
+            // ignore text nodes (type = 3)
+            if(projectItem.nodeType != 3) {
+                if(projectItem.id === containerID) {
+                    projectItem.classList.add("selected");
+                } else {
+                    projectItem.classList.remove("selected");
+                }
+            }
+        });
+    }
+
     return {
         renderProjectList,
-        renderProjectListEntry
+        renderProjectListEntry,
+        highlightProjectItem
     };
 })();
 

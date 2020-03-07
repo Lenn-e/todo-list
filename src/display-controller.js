@@ -67,6 +67,7 @@ const displayController = (() => {
         let container = event.target;
         container = organizer.getProjectContainer(event.target.id);
         userInterface.renderContainer(container);
+        userInterface.highlightProjectItem(container.getProjectID());
     }
 
     function createNewProject(event) {
@@ -79,6 +80,8 @@ const displayController = (() => {
             const project = TodoContainer(projectName);
             organizer.storeProjectContainer(project);
             userInterface.renderProjectListEntry(project);
+            userInterface.highlightProjectItem(project.getProjectID());
+            userInterface.renderContainer(project);
             localStorageFunctions.saveProjectListToLS();
         }
     }
